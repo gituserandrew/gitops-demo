@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+nameSuffix: -prod
+
+replicas:
+  - name: go-app
+    count: 1
+
+images:
+  - name: <registry/image_name>
+    newTag: go-backend-v1.0
+
+
+

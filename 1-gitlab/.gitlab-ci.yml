@@ -1,0 +1,14 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: docker
+  services:
+    - docker:dind
+  script:
+    - echo "$DOCKER_KEY" | docker login -u "$DOCKER_USER" --password-stdin
+    - docker build -t <img-name:version> .
+    - docker tag <img-name:version> <registry-name/image:tag-version>
+    - docker push <registry-name/image:tag-version>
+
